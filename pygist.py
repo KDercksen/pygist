@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+import os
 import requests
 
 
@@ -20,7 +21,7 @@ def post_files(files, description='', public=False):
     # Add files to data dict
     for fi in files:
         with open(fi) as f:
-            data['files'][fi] = {'content': f.read()}
+            data['files'][os.path.basename(fi)] = {'content': f.read()}
 
     r = requests.post(URL, headers=auth_header, json=data)
 
